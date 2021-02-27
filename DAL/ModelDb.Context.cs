@@ -12,6 +12,8 @@ namespace DAL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class ExamDBEntities : DbContext
     {
@@ -35,5 +37,18 @@ namespace DAL
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Answer> Answers { get; set; }
+    
+        public virtual ObjectResult<Question> GetQuestions(Nullable<int> leveid, Nullable<int> number)
+        {
+            var leveidParameter = leveid.HasValue ?
+                new ObjectParameter("leveid", leveid) :
+                new ObjectParameter("leveid", typeof(int));
+    
+            var numberParameter = number.HasValue ?
+                new ObjectParameter("number", number) :
+                new ObjectParameter("number", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Question>("GetQuestions", leveidParameter, numberParameter);
+        }
     }
 }

@@ -43,8 +43,13 @@
   <ItemGroup>
     <Compile Include="GenericService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuestionService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{CE873EC4-2A2B-4AFE-AE77-69F72EA42F6D}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\InterfaceBase\InterfaceBase.csproj">
       <Project>{97bd4f2a-2638-49a1-8f3f-ff7e22c736d9}</Project>
       <Name>InterfaceBase</Name>

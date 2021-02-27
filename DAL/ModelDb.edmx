@@ -236,6 +236,10 @@ warning 6002: The table/view 'ExamDB.dbo.Answer' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetQuestions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="leveid" Type="int" Mode="In" />
+          <Parameter Name="number" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="ExamDBModelStoreContainer">
           <EntitySet Name="Attend" EntityType="Self.Attend" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExamDetail" EntityType="Self.ExamDetail" Schema="dbo" store:Type="Tables" />
@@ -609,6 +613,10 @@ warning 6002: The table/view 'ExamDB.dbo.Answer' does not have a primary key def
             <End Role="Role" EntitySet="Roles" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
+          <FunctionImport Name="GetQuestions">
+            <Parameter Name="leveid" Mode="In" Type="Int32" />
+            <Parameter Name="number" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -721,6 +729,7 @@ warning 6002: The table/view 'ExamDB.dbo.Answer' does not have a primary key def
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetQuestions" FunctionName="ExamDBModel.Store.GetQuestions" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
