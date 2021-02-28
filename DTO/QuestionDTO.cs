@@ -9,7 +9,7 @@ namespace DTO
     public class QuestionDTO
     {
         public int QuestionId { get; set; }
-        public string Question1 { get; set; }
+        public string QuestionContent { get; set; }
         public Nullable<int> LevelId { get; set; }
         public Nullable<int> CreateBy { get; set; }
         public Nullable<System.DateTime> CreateOn { get; set; }

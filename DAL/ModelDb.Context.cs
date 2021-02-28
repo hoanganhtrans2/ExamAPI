@@ -50,5 +50,18 @@ namespace DAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Question>("GetQuestions", leveidParameter, numberParameter);
         }
+    
+        public virtual ObjectResult<Question> GetQuestions(Nullable<int> leveid, Nullable<int> number, MergeOption mergeOption)
+        {
+            var leveidParameter = leveid.HasValue ?
+                new ObjectParameter("leveid", leveid) :
+                new ObjectParameter("leveid", typeof(int));
+    
+            var numberParameter = number.HasValue ?
+                new ObjectParameter("number", number) :
+                new ObjectParameter("number", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Question>("GetQuestions", mergeOption, leveidParameter, numberParameter);
+        }
     }
 }

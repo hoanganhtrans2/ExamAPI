@@ -66,7 +66,7 @@ warning 6002: The table/view 'ExamDB.dbo.Answer' does not have a primary key def
             <PropertyRef Name="QuestionId" />
           </Key>
           <Property Name="QuestionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Question" Type="nvarchar" MaxLength="200" />
+          <Property Name="QuestionContent" Type="nvarchar" MaxLength="200" />
           <Property Name="LevelId" Type="int" />
           <Property Name="CreateBy" Type="int" />
           <Property Name="CreateOn" Type="datetime2" Precision="7" />
@@ -369,7 +369,7 @@ warning 6002: The table/view 'ExamDB.dbo.Answer' does not have a primary key def
             <PropertyRef Name="QuestionId" />
           </Key>
           <Property Name="QuestionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Question1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="QuestionContent" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="LevelId" Type="Int32" />
           <Property Name="CreateBy" Type="Int32" />
           <Property Name="CreateOn" Type="DateTime" Precision="7" />
@@ -613,7 +613,7 @@ warning 6002: The table/view 'ExamDB.dbo.Answer' does not have a primary key def
             <End Role="Role" EntitySet="Roles" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
-          <FunctionImport Name="GetQuestions">
+          <FunctionImport Name="GetQuestions" EntitySet="Questions" ReturnType="Collection(ExamDBModel.Question)">
             <Parameter Name="leveid" Mode="In" Type="Int32" />
             <Parameter Name="number" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -677,7 +677,7 @@ warning 6002: The table/view 'ExamDB.dbo.Answer' does not have a primary key def
             <EntityTypeMapping TypeName="ExamDBModel.Question">
               <MappingFragment StoreEntitySet="Question">
                 <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
-                <ScalarProperty Name="Question1" ColumnName="Question" />
+                <ScalarProperty Name="QuestionContent" ColumnName="QuestionContent" />
                 <ScalarProperty Name="LevelId" ColumnName="LevelId" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="CreateOn" ColumnName="CreateOn" />
