@@ -19,7 +19,7 @@ namespace ExamAPI
             var builder = new ContainerBuilder();
             var config = GlobalConfiguration.Configuration;
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
-            builder.RegisterType<ProceduceRepository>().As<IProceduceRepository>();
+           // builder.RegisterType<ProceduceRepository>().As<IProceduceRepository>();
             builder.RegisterGeneric(typeof(GenericRepository<>)).As(typeof(IGenericRepository<>)).InstancePerLifetimeScope();
             builder.RegisterGeneric(typeof(GenericService<>)).As(typeof(IGenericService<>)).InstancePerLifetimeScope();           
             builder.RegisterAssemblyTypes(typeof(QuestionService).Assembly)

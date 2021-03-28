@@ -16,9 +16,9 @@ namespace ServiceBase
             this.service = service;
         }
 
-        public IEnumerable<Question> GetQuestions(int levelId, int numberQuestion)
-        {
-            return service.GetQuestions(levelId, numberQuestion);
-        }
+        //public IEnumerable<Question> GetQuestions(int levelId, int numberQuestion)
+        //{
+        //    return service.GetQuestions(levelId, numberQuestion);
+        //}
     }
 }

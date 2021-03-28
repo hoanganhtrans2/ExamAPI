@@ -9,6 +9,6 @@ namespace InterfaceBase
 {
     public interface IProceduceRepository
     {
-        IEnumerable<Question> GetQuestions(int levelId, int numberQuestion);
+        //IEnumerable<Question> GetQuestions(int levelId, int numberQuestion);
     }
 }

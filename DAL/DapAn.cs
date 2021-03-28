@@ -12,23 +12,20 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Attend
+    public partial class DapAn
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Attend()
+        public DapAn()
         {
-            this.Answers = new HashSet<Answer>();
+            this.CauTraLois = new HashSet<CauTraLoi>();
         }
     
-        public int ExamInfoId { get; set; }
-        public int UserId { get; set; }
-        public Nullable<double> Point { get; set; }
-        public int AttendId { get; set; }
-        public Nullable<int> SubmitIn { get; set; }
+        public int DapAnId { get; set; }
+        public string NoiDung { get; set; }
+        public Nullable<int> CauHoiId { get; set; }
     
+        public virtual CauHoi CauHoi { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Answer> Answers { get; set; }
-        public virtual ExamInfo ExamInfo { get; set; }
-        public virtual User User { get; set; }
+        public virtual ICollection<CauTraLoi> CauTraLois { get; set; }
     }
 }

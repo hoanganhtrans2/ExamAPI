@@ -12,24 +12,27 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class CauHoi
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public CauHoi()
         {
-            this.Attends = new HashSet<Attend>();
+            this.ChiTietDeThis = new HashSet<ChiTietDeThi>();
+            this.DapAns = new HashSet<DapAn>();
         }
     
-        public int UserId { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string PhoneNumber { get; set; }
-        public Nullable<int> RoleId { get; set; }
+        public int CauHoiId { get; set; }
+        public string NoiDung { get; set; }
+        public Nullable<int> CreateBy { get; set; }
         public Nullable<System.DateTime> CreateOn { get; set; }
+        public Nullable<int> LastUpdateBy { get; set; }
+        public Nullable<System.DateTime> LastUpdateOn { get; set; }
+        public Nullable<int> DapAnId { get; set; }
+        public Nullable<bool> Deleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Attend> Attends { get; set; }
-        public virtual Role Role { get; set; }
+        public virtual ICollection<ChiTietDeThi> ChiTietDeThis { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DapAn> DapAns { get; set; }
     }
 }

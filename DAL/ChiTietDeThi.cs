@@ -12,20 +12,23 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Option
+    public partial class ChiTietDeThi
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Option()
+        public ChiTietDeThi()
         {
-            this.Answers = new HashSet<Answer>();
+            this.CauTraLois = new HashSet<CauTraLoi>();
         }
     
-        public int OptionId { get; set; }
-        public string Title { get; set; }
-        public Nullable<int> QuestionId { get; set; }
+        public int ChiTietDeThiId { get; set; }
+        public Nullable<int> DeThiId { get; set; }
+        public Nullable<int> CauHoiId { get; set; }
+        public Nullable<int> LastUpdateBy { get; set; }
+        public Nullable<System.DateTime> LastUpdateOn { get; set; }
     
-        public virtual Question Question { get; set; }
+        public virtual CauHoi CauHoi { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Answer> Answers { get; set; }
+        public virtual ICollection<CauTraLoi> CauTraLois { get; set; }
+        public virtual DeThi DeThi { get; set; }
     }
 }

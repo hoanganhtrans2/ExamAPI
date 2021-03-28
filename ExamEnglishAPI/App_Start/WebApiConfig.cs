@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace ExamAPI
+namespace ExamEnglishAPI
 {
     public static class WebApiConfig
     {
@@ -12,8 +12,6 @@ namespace ExamAPI
             // Web API configuration and services
 
             // Web API routes
-            config.Filters.Add(new AuthorizeAttribute());
-
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(

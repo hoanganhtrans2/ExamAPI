@@ -9,6 +9,6 @@ namespace InterfaceBase
 {
     public interface IQuestion
     {
-        IEnumerable<Question> GetQuestions(int levelId, int numberQuestion);
+       // IEnumerable<Question> GetQuestions(int levelId, int numberQuestion);
     }
 }

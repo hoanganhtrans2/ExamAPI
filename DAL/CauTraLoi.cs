@@ -12,14 +12,14 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Answer
+    public partial class CauTraLoi
     {
-        public int AttendId { get; set; }
-        public int ExamDetailId { get; set; }
-        public int OptionId { get; set; }
+        public int PhieuDuThiId { get; set; }
+        public int ChiTietDeThiId { get; set; }
+        public int DapAnId { get; set; }
     
-        public virtual Attend Attend { get; set; }
-        public virtual ExamDetail ExamDetail { get; set; }
-        public virtual Option Option { get; set; }
+        public virtual ChiTietDeThi ChiTietDeThi { get; set; }
+        public virtual DapAn DapAn { get; set; }
+        public virtual PhieuDuThi PhieuDuThi { get; set; }
     }
 }

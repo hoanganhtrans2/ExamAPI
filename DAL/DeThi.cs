@@ -12,29 +12,21 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Question
+    public partial class DeThi
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Question()
+        public DeThi()
         {
-            this.ExamDetails = new HashSet<ExamDetail>();
-            this.Options = new HashSet<Option>();
+            this.CaThis = new HashSet<CaThi>();
+            this.ChiTietDeThis = new HashSet<ChiTietDeThi>();
         }
     
-        public int QuestionId { get; set; }
-        public string QuestionContent { get; set; }
-        public Nullable<int> LevelId { get; set; }
-        public Nullable<int> CreateBy { get; set; }
-        public Nullable<System.DateTime> CreateOn { get; set; }
-        public Nullable<int> LastUpDateBy { get; set; }
-        public Nullable<System.DateTime> LastUpDateOn { get; set; }
-        public Nullable<int> OptionId { get; set; }
-        public Nullable<bool> Deleted { get; set; }
+        public int DeThiId { get; set; }
+        public Nullable<int> ThoiGianThi { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ExamDetail> ExamDetails { get; set; }
-        public virtual Level Level { get; set; }
+        public virtual ICollection<CaThi> CaThis { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Option> Options { get; set; }
+        public virtual ICollection<ChiTietDeThi> ChiTietDeThis { get; set; }
     }
 }

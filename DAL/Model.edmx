@@ -1,0 +1,761 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ThiTiengAnhModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CaThi">
+          <Key>
+            <PropertyRef Name="CaThiId" />
+          </Key>
+          <Property Name="CaThiId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NgayThi" Type="datetime2" Precision="7" />
+          <Property Name="SoLuongThiSinh" Type="int" />
+          <Property Name="CreateBy" Type="int" />
+          <Property Name="CreateOn" Type="datetime2" Precision="7" />
+          <Property Name="DeThiId" Type="int" />
+        </EntityType>
+        <EntityType Name="CauHoi">
+          <Key>
+            <PropertyRef Name="CauHoiId" />
+          </Key>
+          <Property Name="CauHoiId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NoiDung" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreateBy" Type="int" />
+          <Property Name="CreateOn" Type="datetime2" Precision="7" />
+          <Property Name="LastUpdateBy" Type="int" />
+          <Property Name="LastUpdateOn" Type="datetime2" Precision="7" />
+          <Property Name="DapAnId" Type="int" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="CauTraLoi">
+          <Key>
+            <PropertyRef Name="PhieuDuThiId" />
+            <PropertyRef Name="ChiTietDeThiId" />
+          </Key>
+          <Property Name="PhieuDuThiId" Type="int" Nullable="false" />
+          <Property Name="ChiTietDeThiId" Type="int" Nullable="false" />
+          <Property Name="DapAnId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChiTietDeThi">
+          <Key>
+            <PropertyRef Name="ChiTietDeThiId" />
+          </Key>
+          <Property Name="ChiTietDeThiId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeThiId" Type="int" />
+          <Property Name="CauHoiId" Type="int" />
+          <Property Name="LastUpdateBy" Type="int" />
+          <Property Name="LastUpdateOn" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="DapAn">
+          <Key>
+            <PropertyRef Name="DapAnId" />
+          </Key>
+          <Property Name="DapAnId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NoiDung" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CauHoiId" Type="int" />
+        </EntityType>
+        <EntityType Name="DeThi">
+          <Key>
+            <PropertyRef Name="DeThiId" />
+          </Key>
+          <Property Name="DeThiId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ThoiGianThi" Type="int" />
+        </EntityType>
+        <EntityType Name="PhieuDuThi">
+          <Key>
+            <PropertyRef Name="PhieuDuThiId" />
+          </Key>
+          <Property Name="PhieuDuThiId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaiKhoanId" Type="int" />
+          <Property Name="CaThiId" Type="int" />
+        </EntityType>
+        <EntityType Name="PhieuKetQua">
+          <Key>
+            <PropertyRef Name="PhieuDuThiId" />
+          </Key>
+          <Property Name="Diem" Type="float" />
+          <Property Name="PhieuDuThiId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TaiKhoan">
+          <Key>
+            <PropertyRef Name="TaiKhoanId" />
+          </Key>
+          <Property Name="TaiKhoanId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="50" />
+          <Property Name="GioiTinh" Type="bit" />
+          <Property Name="SoDienThoai" Type="nchar" MaxLength="10" />
+          <Property Name="NgaySinh" Type="date" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="10" />
+          <Property Name="RoleId" Type="int" />
+        </EntityType>
+        <Association Name="FK_CaThi_DeThi">
+          <End Role="DeThi" Type="Self.DeThi" Multiplicity="0..1" />
+          <End Role="CaThi" Type="Self.CaThi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeThi">
+              <PropertyRef Name="DeThiId" />
+            </Principal>
+            <Dependent Role="CaThi">
+              <PropertyRef Name="DeThiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CauTraLoi_ChiTietDeThi">
+          <End Role="ChiTietDeThi" Type="Self.ChiTietDeThi" Multiplicity="1" />
+          <End Role="CauTraLoi" Type="Self.CauTraLoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChiTietDeThi">
+              <PropertyRef Name="ChiTietDeThiId" />
+            </Principal>
+            <Dependent Role="CauTraLoi">
+              <PropertyRef Name="ChiTietDeThiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CauTraLoi_DapAn">
+          <End Role="DapAn" Type="Self.DapAn" Multiplicity="1" />
+          <End Role="CauTraLoi" Type="Self.CauTraLoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DapAn">
+              <PropertyRef Name="DapAnId" />
+            </Principal>
+            <Dependent Role="CauTraLoi">
+              <PropertyRef Name="DapAnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CauTraLoi_PhieuDuThi">
+          <End Role="PhieuDuThi" Type="Self.PhieuDuThi" Multiplicity="1" />
+          <End Role="CauTraLoi" Type="Self.CauTraLoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhieuDuThi">
+              <PropertyRef Name="PhieuDuThiId" />
+            </Principal>
+            <Dependent Role="CauTraLoi">
+              <PropertyRef Name="PhieuDuThiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChiTietDeThi_CauHoi">
+          <End Role="CauHoi" Type="Self.CauHoi" Multiplicity="0..1" />
+          <End Role="ChiTietDeThi" Type="Self.ChiTietDeThi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CauHoi">
+              <PropertyRef Name="CauHoiId" />
+            </Principal>
+            <Dependent Role="ChiTietDeThi">
+              <PropertyRef Name="CauHoiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChiTietDeThi_DeThi">
+          <End Role="DeThi" Type="Self.DeThi" Multiplicity="0..1" />
+          <End Role="ChiTietDeThi" Type="Self.ChiTietDeThi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeThi">
+              <PropertyRef Name="DeThiId" />
+            </Principal>
+            <Dependent Role="ChiTietDeThi">
+              <PropertyRef Name="DeThiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DapAn_CauHoi">
+          <End Role="CauHoi" Type="Self.CauHoi" Multiplicity="0..1" />
+          <End Role="DapAn" Type="Self.DapAn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CauHoi">
+              <PropertyRef Name="CauHoiId" />
+            </Principal>
+            <Dependent Role="DapAn">
+              <PropertyRef Name="CauHoiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhieuDuThi_CaThi">
+          <End Role="CaThi" Type="Self.CaThi" Multiplicity="0..1" />
+          <End Role="PhieuDuThi" Type="Self.PhieuDuThi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CaThi">
+              <PropertyRef Name="CaThiId" />
+            </Principal>
+            <Dependent Role="PhieuDuThi">
+              <PropertyRef Name="CaThiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhieuDuThi_PhieuKetQua">
+          <End Role="PhieuKetQua" Type="Self.PhieuKetQua" Multiplicity="1" />
+          <End Role="PhieuDuThi" Type="Self.PhieuDuThi" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PhieuKetQua">
+              <PropertyRef Name="PhieuDuThiId" />
+            </Principal>
+            <Dependent Role="PhieuDuThi">
+              <PropertyRef Name="PhieuDuThiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhieuDuThi_TaiKhoan">
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+          <End Role="PhieuDuThi" Type="Self.PhieuDuThi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaiKhoan">
+              <PropertyRef Name="TaiKhoanId" />
+            </Principal>
+            <Dependent Role="PhieuDuThi">
+              <PropertyRef Name="TaiKhoanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Role_TaiKhoan">
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="1" />
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TaiKhoan">
+              <PropertyRef Name="TaiKhoanId" />
+            </Principal>
+            <Dependent Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ThiTiengAnhModelStoreContainer">
+          <EntitySet Name="CaThi" EntityType="Self.CaThi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CauHoi" EntityType="Self.CauHoi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CauTraLoi" EntityType="Self.CauTraLoi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChiTietDeThi" EntityType="Self.ChiTietDeThi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DapAn" EntityType="Self.DapAn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeThi" EntityType="Self.DeThi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhieuDuThi" EntityType="Self.PhieuDuThi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhieuKetQua" EntityType="Self.PhieuKetQua" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CaThi_DeThi" Association="Self.FK_CaThi_DeThi">
+            <End Role="DeThi" EntitySet="DeThi" />
+            <End Role="CaThi" EntitySet="CaThi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CauTraLoi_ChiTietDeThi" Association="Self.FK_CauTraLoi_ChiTietDeThi">
+            <End Role="ChiTietDeThi" EntitySet="ChiTietDeThi" />
+            <End Role="CauTraLoi" EntitySet="CauTraLoi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CauTraLoi_DapAn" Association="Self.FK_CauTraLoi_DapAn">
+            <End Role="DapAn" EntitySet="DapAn" />
+            <End Role="CauTraLoi" EntitySet="CauTraLoi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CauTraLoi_PhieuDuThi" Association="Self.FK_CauTraLoi_PhieuDuThi">
+            <End Role="PhieuDuThi" EntitySet="PhieuDuThi" />
+            <End Role="CauTraLoi" EntitySet="CauTraLoi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChiTietDeThi_CauHoi" Association="Self.FK_ChiTietDeThi_CauHoi">
+            <End Role="CauHoi" EntitySet="CauHoi" />
+            <End Role="ChiTietDeThi" EntitySet="ChiTietDeThi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChiTietDeThi_DeThi" Association="Self.FK_ChiTietDeThi_DeThi">
+            <End Role="DeThi" EntitySet="DeThi" />
+            <End Role="ChiTietDeThi" EntitySet="ChiTietDeThi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DapAn_CauHoi" Association="Self.FK_DapAn_CauHoi">
+            <End Role="CauHoi" EntitySet="CauHoi" />
+            <End Role="DapAn" EntitySet="DapAn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhieuDuThi_CaThi" Association="Self.FK_PhieuDuThi_CaThi">
+            <End Role="CaThi" EntitySet="CaThi" />
+            <End Role="PhieuDuThi" EntitySet="PhieuDuThi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhieuDuThi_PhieuKetQua" Association="Self.FK_PhieuDuThi_PhieuKetQua">
+            <End Role="PhieuKetQua" EntitySet="PhieuKetQua" />
+            <End Role="PhieuDuThi" EntitySet="PhieuDuThi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhieuDuThi_TaiKhoan" Association="Self.FK_PhieuDuThi_TaiKhoan">
+            <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+            <End Role="PhieuDuThi" EntitySet="PhieuDuThi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Role_TaiKhoan" Association="Self.FK_Role_TaiKhoan">
+            <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+            <End Role="Role" EntitySet="Role" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ThiTiengAnhModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CaThi">
+          <Key>
+            <PropertyRef Name="CaThiId" />
+          </Key>
+          <Property Name="CaThiId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NgayThi" Type="DateTime" Precision="7" />
+          <Property Name="SoLuongThiSinh" Type="Int32" />
+          <Property Name="CreateBy" Type="Int32" />
+          <Property Name="CreateOn" Type="DateTime" Precision="7" />
+          <Property Name="DeThiId" Type="Int32" />
+          <NavigationProperty Name="DeThi" Relationship="Self.FK_CaThi_DeThi" FromRole="CaThi" ToRole="DeThi" />
+          <NavigationProperty Name="PhieuDuThis" Relationship="Self.FK_PhieuDuThi_CaThi" FromRole="CaThi" ToRole="PhieuDuThi" />
+        </EntityType>
+        <EntityType Name="CauHoi">
+          <Key>
+            <PropertyRef Name="CauHoiId" />
+          </Key>
+          <Property Name="CauHoiId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateBy" Type="Int32" />
+          <Property Name="CreateOn" Type="DateTime" Precision="7" />
+          <Property Name="LastUpdateBy" Type="Int32" />
+          <Property Name="LastUpdateOn" Type="DateTime" Precision="7" />
+          <Property Name="DapAnId" Type="Int32" />
+          <Property Name="Deleted" Type="Boolean" />
+          <NavigationProperty Name="ChiTietDeThis" Relationship="Self.FK_ChiTietDeThi_CauHoi" FromRole="CauHoi" ToRole="ChiTietDeThi" />
+          <NavigationProperty Name="DapAns" Relationship="Self.FK_DapAn_CauHoi" FromRole="CauHoi" ToRole="DapAn" />
+        </EntityType>
+        <EntityType Name="CauTraLoi">
+          <Key>
+            <PropertyRef Name="PhieuDuThiId" />
+            <PropertyRef Name="ChiTietDeThiId" />
+          </Key>
+          <Property Name="PhieuDuThiId" Type="Int32" Nullable="false" />
+          <Property Name="ChiTietDeThiId" Type="Int32" Nullable="false" />
+          <Property Name="DapAnId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ChiTietDeThi" Relationship="Self.FK_CauTraLoi_ChiTietDeThi" FromRole="CauTraLoi" ToRole="ChiTietDeThi" />
+          <NavigationProperty Name="DapAn" Relationship="Self.FK_CauTraLoi_DapAn" FromRole="CauTraLoi" ToRole="DapAn" />
+          <NavigationProperty Name="PhieuDuThi" Relationship="Self.FK_CauTraLoi_PhieuDuThi" FromRole="CauTraLoi" ToRole="PhieuDuThi" />
+        </EntityType>
+        <EntityType Name="ChiTietDeThi">
+          <Key>
+            <PropertyRef Name="ChiTietDeThiId" />
+          </Key>
+          <Property Name="ChiTietDeThiId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeThiId" Type="Int32" />
+          <Property Name="CauHoiId" Type="Int32" />
+          <Property Name="LastUpdateBy" Type="Int32" />
+          <Property Name="LastUpdateOn" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="CauHoi" Relationship="Self.FK_ChiTietDeThi_CauHoi" FromRole="ChiTietDeThi" ToRole="CauHoi" />
+          <NavigationProperty Name="CauTraLois" Relationship="Self.FK_CauTraLoi_ChiTietDeThi" FromRole="ChiTietDeThi" ToRole="CauTraLoi" />
+          <NavigationProperty Name="DeThi" Relationship="Self.FK_ChiTietDeThi_DeThi" FromRole="ChiTietDeThi" ToRole="DeThi" />
+        </EntityType>
+        <EntityType Name="DapAn">
+          <Key>
+            <PropertyRef Name="DapAnId" />
+          </Key>
+          <Property Name="DapAnId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NoiDung" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CauHoiId" Type="Int32" />
+          <NavigationProperty Name="CauHoi" Relationship="Self.FK_DapAn_CauHoi" FromRole="DapAn" ToRole="CauHoi" />
+          <NavigationProperty Name="CauTraLois" Relationship="Self.FK_CauTraLoi_DapAn" FromRole="DapAn" ToRole="CauTraLoi" />
+        </EntityType>
+        <EntityType Name="DeThi">
+          <Key>
+            <PropertyRef Name="DeThiId" />
+          </Key>
+          <Property Name="DeThiId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ThoiGianThi" Type="Int32" />
+          <NavigationProperty Name="CaThis" Relationship="Self.FK_CaThi_DeThi" FromRole="DeThi" ToRole="CaThi" />
+          <NavigationProperty Name="ChiTietDeThis" Relationship="Self.FK_ChiTietDeThi_DeThi" FromRole="DeThi" ToRole="ChiTietDeThi" />
+        </EntityType>
+        <EntityType Name="PhieuDuThi">
+          <Key>
+            <PropertyRef Name="PhieuDuThiId" />
+          </Key>
+          <Property Name="PhieuDuThiId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaiKhoanId" Type="Int32" />
+          <Property Name="CaThiId" Type="Int32" />
+          <NavigationProperty Name="CaThi" Relationship="Self.FK_PhieuDuThi_CaThi" FromRole="PhieuDuThi" ToRole="CaThi" />
+          <NavigationProperty Name="CauTraLois" Relationship="Self.FK_CauTraLoi_PhieuDuThi" FromRole="PhieuDuThi" ToRole="CauTraLoi" />
+          <NavigationProperty Name="PhieuKetQua" Relationship="Self.FK_PhieuDuThi_PhieuKetQua" FromRole="PhieuDuThi" ToRole="PhieuKetQua" />
+          <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_PhieuDuThi_TaiKhoan" FromRole="PhieuDuThi" ToRole="TaiKhoan" />
+        </EntityType>
+        <EntityType Name="PhieuKetQua">
+          <Key>
+            <PropertyRef Name="PhieuDuThiId" />
+          </Key>
+          <Property Name="Diem" Type="Double" />
+          <Property Name="PhieuDuThiId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PhieuDuThi" Relationship="Self.FK_PhieuDuThi_PhieuKetQua" FromRole="PhieuKetQua" ToRole="PhieuDuThi" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_Role_TaiKhoan" FromRole="Role" ToRole="TaiKhoan" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TaiKhoan">
+          <Key>
+            <PropertyRef Name="TaiKhoanId" />
+          </Key>
+          <Property Name="TaiKhoanId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GioiTinh" Type="Boolean" />
+          <Property Name="SoDienThoai" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RoleId" Type="Int32" />
+          <NavigationProperty Name="PhieuDuThis" Relationship="Self.FK_PhieuDuThi_TaiKhoan" FromRole="TaiKhoan" ToRole="PhieuDuThi" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Role_TaiKhoan" FromRole="TaiKhoan" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK_CaThi_DeThi">
+          <End Role="DeThi" Type="Self.DeThi" Multiplicity="0..1" />
+          <End Role="CaThi" Type="Self.CaThi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeThi">
+              <PropertyRef Name="DeThiId" />
+            </Principal>
+            <Dependent Role="CaThi">
+              <PropertyRef Name="DeThiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhieuDuThi_CaThi">
+          <End Role="CaThi" Type="Self.CaThi" Multiplicity="0..1" />
+          <End Role="PhieuDuThi" Type="Self.PhieuDuThi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CaThi">
+              <PropertyRef Name="CaThiId" />
+            </Principal>
+            <Dependent Role="PhieuDuThi">
+              <PropertyRef Name="CaThiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChiTietDeThi_CauHoi">
+          <End Role="CauHoi" Type="Self.CauHoi" Multiplicity="0..1" />
+          <End Role="ChiTietDeThi" Type="Self.ChiTietDeThi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CauHoi">
+              <PropertyRef Name="CauHoiId" />
+            </Principal>
+            <Dependent Role="ChiTietDeThi">
+              <PropertyRef Name="CauHoiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DapAn_CauHoi">
+          <End Role="CauHoi" Type="Self.CauHoi" Multiplicity="0..1" />
+          <End Role="DapAn" Type="Self.DapAn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CauHoi">
+              <PropertyRef Name="CauHoiId" />
+            </Principal>
+            <Dependent Role="DapAn">
+              <PropertyRef Name="CauHoiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CauTraLoi_ChiTietDeThi">
+          <End Role="ChiTietDeThi" Type="Self.ChiTietDeThi" Multiplicity="1" />
+          <End Role="CauTraLoi" Type="Self.CauTraLoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChiTietDeThi">
+              <PropertyRef Name="ChiTietDeThiId" />
+            </Principal>
+            <Dependent Role="CauTraLoi">
+              <PropertyRef Name="ChiTietDeThiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CauTraLoi_DapAn">
+          <End Role="DapAn" Type="Self.DapAn" Multiplicity="1" />
+          <End Role="CauTraLoi" Type="Self.CauTraLoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DapAn">
+              <PropertyRef Name="DapAnId" />
+            </Principal>
+            <Dependent Role="CauTraLoi">
+              <PropertyRef Name="DapAnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CauTraLoi_PhieuDuThi">
+          <End Role="PhieuDuThi" Type="Self.PhieuDuThi" Multiplicity="1" />
+          <End Role="CauTraLoi" Type="Self.CauTraLoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhieuDuThi">
+              <PropertyRef Name="PhieuDuThiId" />
+            </Principal>
+            <Dependent Role="CauTraLoi">
+              <PropertyRef Name="PhieuDuThiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChiTietDeThi_DeThi">
+          <End Role="DeThi" Type="Self.DeThi" Multiplicity="0..1" />
+          <End Role="ChiTietDeThi" Type="Self.ChiTietDeThi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeThi">
+              <PropertyRef Name="DeThiId" />
+            </Principal>
+            <Dependent Role="ChiTietDeThi">
+              <PropertyRef Name="DeThiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhieuDuThi_PhieuKetQua">
+          <End Role="PhieuKetQua" Type="Self.PhieuKetQua" Multiplicity="1" />
+          <End Role="PhieuDuThi" Type="Self.PhieuDuThi" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PhieuKetQua">
+              <PropertyRef Name="PhieuDuThiId" />
+            </Principal>
+            <Dependent Role="PhieuDuThi">
+              <PropertyRef Name="PhieuDuThiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhieuDuThi_TaiKhoan">
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+          <End Role="PhieuDuThi" Type="Self.PhieuDuThi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaiKhoan">
+              <PropertyRef Name="TaiKhoanId" />
+            </Principal>
+            <Dependent Role="PhieuDuThi">
+              <PropertyRef Name="TaiKhoanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Role_TaiKhoan">
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="1" />
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TaiKhoan">
+              <PropertyRef Name="TaiKhoanId" />
+            </Principal>
+            <Dependent Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ThiTiengAnhDbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CaThis" EntityType="Self.CaThi" />
+          <EntitySet Name="CauHois" EntityType="Self.CauHoi" />
+          <EntitySet Name="CauTraLois" EntityType="Self.CauTraLoi" />
+          <EntitySet Name="ChiTietDeThis" EntityType="Self.ChiTietDeThi" />
+          <EntitySet Name="DapAns" EntityType="Self.DapAn" />
+          <EntitySet Name="DeThis" EntityType="Self.DeThi" />
+          <EntitySet Name="PhieuDuThis" EntityType="Self.PhieuDuThi" />
+          <EntitySet Name="PhieuKetQuas" EntityType="Self.PhieuKetQua" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TaiKhoans" EntityType="Self.TaiKhoan" />
+          <AssociationSet Name="FK_CaThi_DeThi" Association="Self.FK_CaThi_DeThi">
+            <End Role="DeThi" EntitySet="DeThis" />
+            <End Role="CaThi" EntitySet="CaThis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhieuDuThi_CaThi" Association="Self.FK_PhieuDuThi_CaThi">
+            <End Role="CaThi" EntitySet="CaThis" />
+            <End Role="PhieuDuThi" EntitySet="PhieuDuThis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChiTietDeThi_CauHoi" Association="Self.FK_ChiTietDeThi_CauHoi">
+            <End Role="CauHoi" EntitySet="CauHois" />
+            <End Role="ChiTietDeThi" EntitySet="ChiTietDeThis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DapAn_CauHoi" Association="Self.FK_DapAn_CauHoi">
+            <End Role="CauHoi" EntitySet="CauHois" />
+            <End Role="DapAn" EntitySet="DapAns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CauTraLoi_ChiTietDeThi" Association="Self.FK_CauTraLoi_ChiTietDeThi">
+            <End Role="ChiTietDeThi" EntitySet="ChiTietDeThis" />
+            <End Role="CauTraLoi" EntitySet="CauTraLois" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CauTraLoi_DapAn" Association="Self.FK_CauTraLoi_DapAn">
+            <End Role="DapAn" EntitySet="DapAns" />
+            <End Role="CauTraLoi" EntitySet="CauTraLois" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CauTraLoi_PhieuDuThi" Association="Self.FK_CauTraLoi_PhieuDuThi">
+            <End Role="PhieuDuThi" EntitySet="PhieuDuThis" />
+            <End Role="CauTraLoi" EntitySet="CauTraLois" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChiTietDeThi_DeThi" Association="Self.FK_ChiTietDeThi_DeThi">
+            <End Role="DeThi" EntitySet="DeThis" />
+            <End Role="ChiTietDeThi" EntitySet="ChiTietDeThis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhieuDuThi_PhieuKetQua" Association="Self.FK_PhieuDuThi_PhieuKetQua">
+            <End Role="PhieuKetQua" EntitySet="PhieuKetQuas" />
+            <End Role="PhieuDuThi" EntitySet="PhieuDuThis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhieuDuThi_TaiKhoan" Association="Self.FK_PhieuDuThi_TaiKhoan">
+            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+            <End Role="PhieuDuThi" EntitySet="PhieuDuThis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Role_TaiKhoan" Association="Self.FK_Role_TaiKhoan">
+            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ThiTiengAnhModelStoreContainer" CdmEntityContainer="ThiTiengAnhDbContext">
+          <EntitySetMapping Name="CaThis">
+            <EntityTypeMapping TypeName="ThiTiengAnhModel.CaThi">
+              <MappingFragment StoreEntitySet="CaThi">
+                <ScalarProperty Name="CaThiId" ColumnName="CaThiId" />
+                <ScalarProperty Name="NgayThi" ColumnName="NgayThi" />
+                <ScalarProperty Name="SoLuongThiSinh" ColumnName="SoLuongThiSinh" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateOn" ColumnName="CreateOn" />
+                <ScalarProperty Name="DeThiId" ColumnName="DeThiId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CauHois">
+            <EntityTypeMapping TypeName="ThiTiengAnhModel.CauHoi">
+              <MappingFragment StoreEntitySet="CauHoi">
+                <ScalarProperty Name="CauHoiId" ColumnName="CauHoiId" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateOn" ColumnName="CreateOn" />
+                <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
+                <ScalarProperty Name="LastUpdateOn" ColumnName="LastUpdateOn" />
+                <ScalarProperty Name="DapAnId" ColumnName="DapAnId" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CauTraLois">
+            <EntityTypeMapping TypeName="ThiTiengAnhModel.CauTraLoi">
+              <MappingFragment StoreEntitySet="CauTraLoi">
+                <ScalarProperty Name="PhieuDuThiId" ColumnName="PhieuDuThiId" />
+                <ScalarProperty Name="ChiTietDeThiId" ColumnName="ChiTietDeThiId" />
+                <ScalarProperty Name="DapAnId" ColumnName="DapAnId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChiTietDeThis">
+            <EntityTypeMapping TypeName="ThiTiengAnhModel.ChiTietDeThi">
+              <MappingFragment StoreEntitySet="ChiTietDeThi">
+                <ScalarProperty Name="ChiTietDeThiId" ColumnName="ChiTietDeThiId" />
+                <ScalarProperty Name="DeThiId" ColumnName="DeThiId" />
+                <ScalarProperty Name="CauHoiId" ColumnName="CauHoiId" />
+                <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
+                <ScalarProperty Name="LastUpdateOn" ColumnName="LastUpdateOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DapAns">
+            <EntityTypeMapping TypeName="ThiTiengAnhModel.DapAn">
+              <MappingFragment StoreEntitySet="DapAn">
+                <ScalarProperty Name="DapAnId" ColumnName="DapAnId" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="CauHoiId" ColumnName="CauHoiId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeThis">
+            <EntityTypeMapping TypeName="ThiTiengAnhModel.DeThi">
+              <MappingFragment StoreEntitySet="DeThi">
+                <ScalarProperty Name="DeThiId" ColumnName="DeThiId" />
+                <ScalarProperty Name="ThoiGianThi" ColumnName="ThoiGianThi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhieuDuThis">
+            <EntityTypeMapping TypeName="ThiTiengAnhModel.PhieuDuThi">
+              <MappingFragment StoreEntitySet="PhieuDuThi">
+                <ScalarProperty Name="PhieuDuThiId" ColumnName="PhieuDuThiId" />
+                <ScalarProperty Name="TaiKhoanId" ColumnName="TaiKhoanId" />
+                <ScalarProperty Name="CaThiId" ColumnName="CaThiId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhieuKetQuas">
+            <EntityTypeMapping TypeName="ThiTiengAnhModel.PhieuKetQua">
+              <MappingFragment StoreEntitySet="PhieuKetQua">
+                <ScalarProperty Name="Diem" ColumnName="Diem" />
+                <ScalarProperty Name="PhieuDuThiId" ColumnName="PhieuDuThiId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="ThiTiengAnhModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ThiTiengAnhModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaiKhoans">
+            <EntityTypeMapping TypeName="ThiTiengAnhModel.TaiKhoan">
+              <MappingFragment StoreEntitySet="TaiKhoan">
+                <ScalarProperty Name="TaiKhoanId" ColumnName="TaiKhoanId" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

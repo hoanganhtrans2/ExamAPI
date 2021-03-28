@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3d3950f9e81e4aefbddda5c7185dee80" Name="Diagram1">
+        <EntityTypeShape EntityType="ThiTiengAnhModel.CaThi" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThiTiengAnhModel.CauHoi" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThiTiengAnhModel.CauTraLoi" Width="1.5" PointX="7.5" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThiTiengAnhModel.ChiTietDeThi" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThiTiengAnhModel.DapAn" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThiTiengAnhModel.DeThi" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThiTiengAnhModel.PhieuDuThi" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThiTiengAnhModel.PhieuKetQua" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThiTiengAnhModel.Role" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThiTiengAnhModel.sysdiagram" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThiTiengAnhModel.TaiKhoan" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="ThiTiengAnhModel.FK_CaThi_DeThi" ManuallyRouted="false" />
+        <AssociationConnector Association="ThiTiengAnhModel.FK_PhieuDuThi_CaThi" ManuallyRouted="false" />
+        <AssociationConnector Association="ThiTiengAnhModel.FK_ChiTietDeThi_CauHoi" ManuallyRouted="false" />
+        <AssociationConnector Association="ThiTiengAnhModel.FK_DapAn_CauHoi" ManuallyRouted="false" />
+        <AssociationConnector Association="ThiTiengAnhModel.FK_CauTraLoi_ChiTietDeThi" ManuallyRouted="false" />
+        <AssociationConnector Association="ThiTiengAnhModel.FK_CauTraLoi_DapAn" ManuallyRouted="false" />
+        <AssociationConnector Association="ThiTiengAnhModel.FK_CauTraLoi_PhieuDuThi" ManuallyRouted="false" />
+        <AssociationConnector Association="ThiTiengAnhModel.FK_ChiTietDeThi_DeThi" ManuallyRouted="false" />
+        <AssociationConnector Association="ThiTiengAnhModel.FK_PhieuDuThi_PhieuKetQua" ManuallyRouted="false" />
+        <AssociationConnector Association="ThiTiengAnhModel.FK_PhieuDuThi_TaiKhoan" ManuallyRouted="false" />
+        <AssociationConnector Association="ThiTiengAnhModel.FK_Role_TaiKhoan" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

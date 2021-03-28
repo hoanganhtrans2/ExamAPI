@@ -12,21 +12,22 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Level
+    public partial class PhieuDuThi
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Level()
+        public PhieuDuThi()
         {
-            this.ExamInfoes = new HashSet<ExamInfo>();
-            this.Questions = new HashSet<Question>();
+            this.CauTraLois = new HashSet<CauTraLoi>();
         }
     
-        public int LevelId { get; set; }
-        public string Title { get; set; }
+        public int PhieuDuThiId { get; set; }
+        public Nullable<int> TaiKhoanId { get; set; }
+        public Nullable<int> CaThiId { get; set; }
     
+        public virtual CaThi CaThi { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ExamInfo> ExamInfoes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Question> Questions { get; set; }
+        public virtual ICollection<CauTraLoi> CauTraLois { get; set; }
+        public virtual PhieuKetQua PhieuKetQua { get; set; }
+        public virtual TaiKhoan TaiKhoan { get; set; }
     }
 }

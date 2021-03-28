@@ -12,11 +12,11 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Role
+    public partial class PhieuKetQua
     {
-        public int RoleId { get; set; }
-        public string Name { get; set; }
+        public Nullable<double> Diem { get; set; }
+        public int PhieuDuThiId { get; set; }
     
-        public virtual TaiKhoan TaiKhoan { get; set; }
+        public virtual PhieuDuThi PhieuDuThi { get; set; }
     }
 }

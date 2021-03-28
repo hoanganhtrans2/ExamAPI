@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class ProceduceRepository : IProceduceRepository
+    public class ProceduceRepository 
     {
-        private ExamDBEntities context = null;
-        public ProceduceRepository()
-        {
-            this.context = new ExamDBEntities();
-        }
+        //private ExamDBEntities context = null;
+        //public ProceduceRepository()
+        //{
+        //    this.context = new ExamDBEntities();
+        //}
 
-        public IEnumerable<Question> GetQuestions(int levelId, int numberQuestion)
-        {
-            return context.GetQuestions(levelId, numberQuestion);
-        }
+        //public IEnumerable<Question> GetQuestions(int levelId, int numberQuestion)
+        //{
+        //    return context.GetQuestions(levelId, numberQuestion);
+        //}
     }
 }

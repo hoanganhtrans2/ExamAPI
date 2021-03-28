@@ -13,15 +13,8 @@ namespace TransferObject
     {
         public MappingProfile()
         {
-            CreateMap<Role, RoleDTO>();
-            CreateMap<Level, LevelDTO>();
-            CreateMap<Option, OptionDTO>();
-            CreateMap<ExamDetail, ExamDetailDTO>();         
-            CreateMap<Attend, AttendDTO>();
-            CreateMap<Answer, AnswerDTO>();
-            CreateMap<ExamInfo, ExamInfoDTO>();            
-            CreateMap<Question, QuestionDTO>();            
-            CreateMap<User, UserDTO>();
+            CreateMap<Role, RoleDTO>();        
+            CreateMap<TaiKhoan, TaiKhoanDTO>();
         }
     }
 }

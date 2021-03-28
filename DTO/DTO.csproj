@@ -41,16 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnswerDTO.cs" />
-    <Compile Include="AttendDTO.cs" />
-    <Compile Include="ExamDetailDTO.cs" />
-    <Compile Include="ExamInfoDTO.cs" />
-    <Compile Include="LevelDTO.cs" />
-    <Compile Include="OptionDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QuestionDTO.cs" />
     <Compile Include="RoleDTO.cs" />
-    <Compile Include="UserDTO.cs" />
+    <Compile Include="TaiKhoanDTO.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

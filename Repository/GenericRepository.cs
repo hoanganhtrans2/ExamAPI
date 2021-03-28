@@ -12,11 +12,11 @@ namespace Repository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private ExamDBEntities _context = null;
+        private ThiTiengAnhDbContext _context = null;
         private DbSet<T> table = null;
         public GenericRepository()
         {
-            _context = new ExamDBEntities();
+            _context = new ThiTiengAnhDbContext();
             table = _context.Set<T>();
         }
         public void Delete(object id)

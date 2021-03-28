@@ -12,26 +12,25 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class ExamInfo
+    public partial class TaiKhoan
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ExamInfo()
+        public TaiKhoan()
         {
-            this.Attends = new HashSet<Attend>();
-            this.ExamDetails = new HashSet<ExamDetail>();
+            this.PhieuDuThis = new HashSet<PhieuDuThi>();
         }
     
-        public int ExamInfoId { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public Nullable<int> Time { get; set; }
-        public Nullable<int> CreateBy { get; set; }
-        public Nullable<System.DateTime> CreateOn { get; set; }
-        public Nullable<int> LevelId { get; set; }
+        public int TaiKhoanId { get; set; }
+        public string Ten { get; set; }
+        public Nullable<bool> GioiTinh { get; set; }
+        public string SoDienThoai { get; set; }
+        public Nullable<System.DateTime> NgaySinh { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public Nullable<int> RoleId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Attend> Attends { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ExamDetail> ExamDetails { get; set; }
-        public virtual Level Level { get; set; }
+        public virtual ICollection<PhieuDuThi> PhieuDuThis { get; set; }
+        public virtual Role Role { get; set; }
     }
 }
